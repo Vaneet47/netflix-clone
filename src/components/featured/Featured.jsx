@@ -3,9 +3,26 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import './featured.scss';
 
-const Featured = () => {
+const Featured = ({ type }) => {
   return (
     <div className='featured'>
+      {type && (
+        <div className='category'>
+          <span>{type === 'movie' ? 'Movies' : 'Series'}</span>
+          <select name='genre' id='genre'>
+            <option>Genre</option>
+            <option value='Adventure'>Adventure</option>
+            <option value='Comedy'>Comedy</option>
+            <option value='Crime'>Crime</option>
+            <option value='Fantasy'>Fantasy</option>
+            <option value='Horror'>Horror</option>
+            <option value='Romance'>Romance</option>
+            <option value='Thriller'>Thriller</option>
+            <option value='Drama'>Drama</option>
+            <option value='Animation'>Animation</option>
+          </select>
+        </div>
+      )}
       <img
         width='100%'
         src='https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia_profile_image.jpg'

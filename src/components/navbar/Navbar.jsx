@@ -9,7 +9,6 @@ const Navbar = () => {
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
-    // console.log(window.pageYOffset);
     // return () => (window.onscroll = null);
   };
 
