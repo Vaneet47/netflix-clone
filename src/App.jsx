@@ -1,9 +1,10 @@
 import React from 'react';
 import './app.scss';
-import Home from './home/Home.jsx';
+import Home from './pages/home/Home.jsx';
+import Watch from './pages/watch/Watch.jsx';
 
 function App() {
-  return <Home />;
+  return <Watch />;
 }
 
 export default App;

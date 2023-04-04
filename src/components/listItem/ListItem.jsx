@@ -8,7 +8,7 @@ import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 const ListItem = ({ index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const trailer =
-    'https://www.youtube.com/watch?v=nA8KmHC2Z-g&ab_channel=RetroBiografen';
+    'https://vod-progressive.akamaized.net/exp=1680599571~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F3391%2F16%2F416958499%2F1796861196.mp4~hmac=d6e5d461239d784eab44570cdd5eb16fbb5383c056bdab70d6bcf1f93cc0fa39/vimeo-prod-skyfire-std-us/01/3391/16/416958499/1796861196.mp4';
   return (
     <div
       className='listItem'
@@ -19,14 +19,8 @@ const ListItem = ({ index }) => {
       <img src='https://i.redd.it/j7o826q9j5x81.jpg' alt='Akira (1988)' />
       {isHovered && (
         <>
-          <iframe
-            src='https://www.youtube.com/embed/nA8KmHC2Z-g'
-            title='YouTube video player'
-            frameborder='0'
-            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-            allowfullscreen
-          ></iframe>
-          {/* <iframe src={trailer} autoPlay={true} loop></iframe> */}
+          <video src={trailer} autoPlay loop></video>
+
           <div className='itemInfo'>
             <div className='icons'>
               <PlayArrowIcon className='icon' />
