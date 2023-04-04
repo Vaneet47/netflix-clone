@@ -25,12 +25,12 @@ const Featured = ({ type }) => {
       )}
       <img
         width='100%'
-        src='https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia_profile_image.jpg'
+        src='https://blenderartists.org/uploads/default/original/4X/8/6/f/86f979f45cc378a71c69061f770318b24782bc60.jpeg'
         alt='Profile picture'
       />
       <div className='info'>
         <img
-          src='https://cdn.shopify.com/s/files/1/0969/9128/products/Cult_Movie_Poster_Fan_Art_-_The_Matrix_-_Tallenge_Hollywood_Poster_Collection_18fafbe4-90d1-4bd1-958f-684e4b26a795.jpg?v=1569314562'
+          src='https://wallpapercave.com/wp/9i1vkNf.jpg'
           alt='Matrix Poster'
         />
         <span className='desc'>
