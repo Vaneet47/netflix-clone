@@ -22,9 +22,9 @@ router.put('/:id', verify, async (req, res) => {
         { new: true }
       );
 
-      res.status(200).json(updatedUser);
+      return res.status(200).json(updatedUser);
     } catch (error) {
-      return res.status(500).json(err);
+      return res.status(500).json(error);
     }
   } else {
     return res.status(403).json('You can update only your account!');
@@ -32,11 +32,88 @@ router.put('/:id', verify, async (req, res) => {
 });
 
 //Delete
+router.delete('/:id', verify, async (req, res) => {
+  if (req.user.id === req.params.id || req.user.isAdmin) {
+    try {
+      await User.findByIdAndDelete(req.params.id);
+
+      return res.status(200).json('User deleted successfully!');
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  } else {
+    return res.status(403).json('You can delete only your account!');
+  }
+});
 
 //Get one user
+router.get('/find/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const { password, ...info } = user._doc;
+    return res.status(200).json(info);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
 
 //Get all users
+router.get('/', verify, async (req, res) => {
+  //'/?new=true'
+  const query = req.query.new;
+  if (req.user.isAdmin) {
+    try {
+      const users = query
+        ? await User.find().sort({ _id: -1 }).limit(10)
+        : await User.find();
 
-//Get user statistics - total user number per month
+      return res.status(200).json(users);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  } else {
+    return res.status(403).json('You need to be an Admin to see all users!');
+  }
+});
+
+//Get user statistics - total users number per month
+router.get('/stats', async (req, res) => {
+  const today = new Date();
+  const lastYear = today.setFullYear(today.setFullYear() - 1);
+
+  const monthsArray = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  try {
+    const data = await User.aggregate([
+      {
+        $project: {
+          month: { $month: '$createdAt' },
+        },
+      },
+      {
+        $group: {
+          _id: '$month',
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
 
 module.exports = router;
