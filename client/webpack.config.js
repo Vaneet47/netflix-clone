@@ -9,7 +9,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test:/\.(js|jsx)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -31,6 +31,18 @@ module.exports = {
         use: ['file-loader'],
       },
     ],
+  },
+  devServer: {
+    port: 8080,
+    hot: true,
+    open: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        router: () => 'http://localhost:8800',
+        logLevel: 'debug' /*optional*/,
+      },
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
