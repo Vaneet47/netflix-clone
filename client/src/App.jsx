@@ -4,24 +4,38 @@ import Home from './pages/home/Home.jsx';
 import Watch from './pages/watch/Watch.jsx';
 import Register from './pages/register/Register.jsx';
 import Login from './pages/login/Login.jsx';
-import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 
 function App() {
+  const user = false;
   return (
     <Router>
       <Switch>
         <Route exact path='/'>
-          <Home />
+          {user ? <Home /> : <Redirect to='/register' />}
         </Route>
-        <Route path='/movies'>
-          <Home type={'movies'} />
+        <Route path='/register'>
+          {user ? <Redirect to='/' /> : <Register />}
         </Route>
-        <Route path='/series'>
-          <Home type={'series'} />
-        </Route>
-        <Route path='/watch'>
-          <Watch />
-        </Route>
+        <Route path='/login'>{user ? <Redirect to='/' /> : <Login />}</Route>
+        {user && (
+          <>
+            <Route path='/movies'>
+              <Home type={'movies'} />
+            </Route>
+            <Route path='/series'>
+              <Home type={'series'} />
+            </Route>
+            <Route path='/watch'>
+              <Watch />
+            </Route>
+          </>
+        )}
       </Switch>
     </Router>
   );
