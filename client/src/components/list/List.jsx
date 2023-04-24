@@ -4,7 +4,7 @@ import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutl
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ListItem from '../listItem/ListItem.jsx';
 
-const List = () => {
+const List = ({ list }) => {
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
   const listRef = useRef();
@@ -23,7 +23,7 @@ const List = () => {
 
   return (
     <div className='list'>
-      <span className='listTitle'>Continue to watch</span>
+      <span className='listTitle'>{list.title}</span>
       <div className='wrapper'>
         <ArrowBackIosNewOutlinedIcon
           className='sliderArrow left'
@@ -31,14 +31,9 @@ const List = () => {
           style={{ display: !isMoved && 'none' }}
         />
         <div className='container' ref={listRef}>
-          <ListItem index={0} />
-          <ListItem index={1} />
-          <ListItem index={2} />
-          <ListItem index={3} />
-          <ListItem index={4} />
-          <ListItem index={5} />
-          <ListItem index={6} />
-          <ListItem index={7} />
+          {list.content.map((item, i) => (
+            <ListItem index={i} item={item} />
+          ))}
         </div>
         <ArrowForwardIosOutlinedIcon
           className='sliderArrow right'
