@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import './featured.scss';
+import axios from 'axios';
 
 const Featured = ({ type }) => {
+  const [content, setContent] = useState({});
+  useEffect(() => {
+    const getRandomContent = async () => {
+      try {
+        const response = await axios.get(`api/movies/random?type=${type}`, {
+          headers: {
+            token:
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2I0MGQ4NTE1Yjg1MjMzNjk0ZmVmNyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4MjM0OTkwNywiZXhwIjoxNjgyNzgxOTA3fQ.6JMgM9JG05Smm9vk6S8jV5ngE3dfrk72u6HgT9Upzn4',
+          },
+        });
+        setContent(response.data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getRandomContent();
+  }, [type]);
   return (
     <div className='featured'>
       {type && (
@@ -23,22 +42,10 @@ const Featured = ({ type }) => {
           </select>
         </div>
       )}
-      <img
-        width='100%'
-        src='https://blenderartists.org/uploads/default/original/4X/8/6/f/86f979f45cc378a71c69061f770318b24782bc60.jpeg'
-        alt='Profile picture'
-      />
+      <img width='100%' src={content.img} alt='Profile picture' />
       <div className='info'>
-        <img
-          src='https://wallpapercave.com/wp/9i1vkNf.jpg'
-          alt='Matrix Poster'
-        />
-        <span className='desc'>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus,
-          sint. Ipsa mollitia nesciunt, qui placeat voluptates fugit ratione
-          autem ex earum unde, ut esse voluptatem pariatur porro blanditiis
-          laborum veritatis.
-        </span>
+        <img src={content.imgTitle} alt='Matrix Poster' />
+        <span className='desc'>{content.desc}</span>
 
         <div className='buttons'>
           <button className='play'>
