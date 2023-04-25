@@ -1,10 +1,11 @@
 .container {
   display: flex;
-  justify-content: space-between;
-  padding: 0px 20px;
+  /* justify-content: space-between; */
+  /* padding: 0px 20px; */
 }
 
 .others{
     flex:4;
     background-color: cyan;
+    padding: 20px;
 }
