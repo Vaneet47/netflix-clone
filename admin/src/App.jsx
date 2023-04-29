@@ -11,6 +11,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import User from './pages/user/User';
+import NewUser from './pages/newUser/NewUser';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path='/user/:userId'>
             <User />
+          </Route>
+          <Route path='/newUser'>
+            <NewUser />
           </Route>
         </Switch>
       </div>
