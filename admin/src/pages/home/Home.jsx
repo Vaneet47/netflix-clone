@@ -14,7 +14,7 @@ function Home() {
         data={userData}
         title='User Analytics'
         grid
-        dataKey='Active Users'
+        dataKey='Active User'
       />
       <div className='homeWidgets'>
         <WidgetSmall />
