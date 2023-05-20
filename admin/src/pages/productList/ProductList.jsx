@@ -19,7 +19,6 @@ function ProductList() {
       headerName: 'Product',
       width: 160,
       renderCell: (params) => {
-        debugger;
         return (
           <div className='productListProduct'>
             <img className='productListImg' src={params.row.img} alt='' />
