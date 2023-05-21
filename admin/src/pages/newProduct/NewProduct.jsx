@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './newProduct.css';
+import storage from '../../firebase';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 function NewProduct() {
   const [movie, setMovie] = useState(null);
@@ -8,10 +10,77 @@ function NewProduct() {
   const [imgSm, setImgSm] = useState(null);
   const [trailer, setTrailer] = useState(null);
   const [video, setVideo] = useState(null);
+  const [uploaded, setUploaded] = useState(0);
 
   const handleChange = (e) => {
     const value = e.target.value;
     setMovie({ ...movie, [e.target.name]: value });
+  };
+
+  const upload = (items) => {
+    items.forEach((item) => {
+      const filename = new Date().getTime() + item.label + '_' + item.file.name;
+      const storageRef = ref(storage, `/items/${filename}`);
+      const uploadTask = uploadBytesResumable(storageRef, item);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          // switch (snapshot.state) {
+          //   case 'paused':
+          //     console.log('upload is paused!');
+          //     break;
+          //   case 'running':
+          //     console.log('upload is running!');
+          //     break;
+          // }
+        },
+        (err) => {
+          console.log(err);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setMovie((prev) => {
+              return { ...prev, [item.label]: downloadURL };
+            });
+            setUploaded((prev) => prev + 1);
+          });
+        }
+      );
+    });
+  };
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+
+    upload([
+      {
+        file: img,
+        label: 'img',
+      },
+      {
+        file: imgTitle,
+        label: 'imgTitle',
+      },
+      {
+        file: imgSm,
+        label: 'imgSm',
+      },
+      {
+        file: trailer,
+        label: 'trailer',
+      },
+      {
+        file: video,
+        label: 'video',
+      },
+    ]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -124,7 +193,15 @@ function NewProduct() {
             onChange={(e) => setVideo(e.target.files[0])}
           />
         </div>
-        <button className='addProductButton'>Create</button>
+        {uploaded === 5 ? (
+          <button className='addProductButton' onClick={handleSubmit}>
+            Create
+          </button>
+        ) : (
+          <button className='addProductButton' onClick={handleUpload}>
+            Upload
+          </button>
+        )}
       </form>
     </div>
   );
