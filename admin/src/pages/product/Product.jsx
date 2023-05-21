@@ -1,48 +1,47 @@
 import React from 'react';
 import './product.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Chart from '../../components/chart/Chart';
 import { productData } from '../../dummyData';
 import { Publish } from '@mui/icons-material';
 
 function Product() {
+  const location = useLocation();
+  const movie = location.movie;
+  debugger;
   return (
     <div className='product'>
       <div className='productTitleContainer'>
-        <h1 className='productTitle'>Product</h1>
+        <h1 className='productTitle'>Movie</h1>
         <Link to='/newProduct'>
           <button className='productAddButton'>Create Product</button>
         </Link>
       </div>
       <div className='productTop'>
-        <div className='productTopLeft'>
+        {/* <div className='productTopLeft'>
           <Chart title='Sales Performance' data={productData} dataKey='Sales' />
-        </div>
+        </div> */}
         <div className='productTopRight'>
           <div className='productInfoTop'>
-            <img
-              src='https://imgix.bustle.com/inverse/f3/a2/d0/5c/5ac2/4ff9/81f2/110f05aa5b50/2019-apple-airpods-update.jpeg?w=672&h=378&fit=crop&crop=faces&auto=format%2Ccompress&q=50&dpr=2&blend=151515&blendAlpha=40&blendMode=normal'
-              alt=''
-              className='productInfoImg'
-            />
-            <span className='productName'>Apple Airpods</span>
+            <img src={movie.img} alt='' className='productInfoImg' />
+            <span className='productName'>{movie.title}</span>
           </div>
           <div className='productInfoBottom'>
             <div className='productInfoItem'>
               <span className='productInfoKey'>id:</span>
-              <span className='productInfoValue'>123</span>
+              <span className='productInfoValue'>{movie._id}</span>
             </div>
             <div className='productInfoItem'>
-              <span className='productInfoKey'>sales:</span>
-              <span className='productInfoValue'>3523</span>
+              <span className='productInfoKey'>genre:</span>
+              <span className='productInfoValue'>{movie.genre}</span>
             </div>
             <div className='productInfoItem'>
-              <span className='productInfoKey'>active:</span>
-              <span className='productInfoValue'>yes</span>
+              <span className='productInfoKey'>year:</span>
+              <span className='productInfoValue'>{movie.year}</span>
             </div>
             <div className='productInfoItem'>
-              <span className='productInfoKey'>in stock:</span>
-              <span className='productInfoValue'>no</span>
+              <span className='productInfoKey'>limit:</span>
+              <span className='productInfoValue'>{movie.limit}</span>
             </div>
           </div>
         </div>
@@ -50,10 +49,19 @@ function Product() {
       <div className='productBottom'>
         <form className='productForm'>
           <div className='productFormLeft'>
-            <label>Product Name</label>
-            <input type='text' placeholder='Apple Airpods' />
-            <label>In Stock</label>
-            <select name='inStock' id='inStock'>
+            <label>Movie Title</label>
+            <input type='text' placeholder={movie.title} />
+            <label>Year</label>
+            <input type='text' placeholder={movie.year} />
+            <label>Genre</label>
+            <input type='text' placeholder={movie.genre} />
+            <label>Limit</label>
+            <input type='text' placeholder={movie.limit} />
+            <label>Trailer</label>
+            <input type='file' placeholder={movie.trailer} />
+            <label>Video</label>
+            <input type='file' placeholder={movie.video} />
+            {/* <select name='inStock' id='inStock'>
               <option value='yes'>Yes</option>
               <option value='no'>No</option>
             </select>
@@ -61,15 +69,11 @@ function Product() {
             <select name='active' id='active'>
               <option value='yes'>Yes</option>
               <option value='no'>No</option>
-            </select>
+            </select> */}
           </div>
           <div className='productFormRight'>
             <div className='productUpload'>
-              <img
-                src='https://imgix.bustle.com/inverse/f3/a2/d0/5c/5ac2/4ff9/81f2/110f05aa5b50/2019-apple-airpods-update.jpeg?w=672&h=378&fit=crop&crop=faces&auto=format%2Ccompress&q=50&dpr=2&blend=151515&blendAlpha=40&blendMode=normal'
-                alt=''
-                className='productUploadImg'
-              />
+              <img src={movie.img} alt='' className='productUploadImg' />
               <label for='file'>
                 <Publish />
               </label>
