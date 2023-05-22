@@ -8,7 +8,7 @@ import { Publish } from '@mui/icons-material';
 function Product() {
   const location = useLocation();
   const movie = location.movie;
-  debugger;
+
   return (
     <div className='product'>
       <div className='productTitleContainer'>
