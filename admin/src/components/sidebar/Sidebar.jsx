@@ -13,6 +13,7 @@ import {
   Report,
   AttachMoney,
   BarChart,
+  List,
 } from '@mui/icons-material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { Link } from 'react-router-dom';
@@ -61,10 +62,12 @@ function Sidebar() {
                 Products
               </li>
             </Link> */}
-            <li className='sidebarListItem'>
-              <AttachMoney className='sidebarIcon' />
-              Transactions
-            </li>
+            <Link to='/lists' className='link'>
+              <li className='sidebarListItem'>
+                <List className='sidebarIcon' />
+                Lists
+              </li>
+            </Link>
             <li className='sidebarListItem'>
               <BarChart className='sidebarIcon' />
               Reports
