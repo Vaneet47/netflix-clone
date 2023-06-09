@@ -19,7 +19,7 @@ const Home = ({ type }) => {
           {
             headers: {
               token:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2I0MGQ4NTE1Yjg1MjMzNjk0ZmVmNyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4MjM0OTkwNywiZXhwIjoxNjgyNzgxOTA3fQ.6JMgM9JG05Smm9vk6S8jV5ngE3dfrk72u6HgT9Upzn4',
+                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2I0MGQ4NTE1Yjg1MjMzNjk0ZmVmNyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4NjI3NjMxNiwiZXhwIjoxNjg2NzA4MzE2fQ.6tI6IPo1D-Y7r3lvZgY_tCPyVolheAhiKvPNJhrrmXA',
             },
           }
         );
@@ -35,7 +35,7 @@ const Home = ({ type }) => {
   return (
     <div className='home'>
       <Navbar />
-      <Featured type={type} />
+      <Featured type={type} setGenre={setGenre} />
       {lists.map((list) => (
         <List list={list} key={list._id} />
       ))}
