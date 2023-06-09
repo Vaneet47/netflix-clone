@@ -18,46 +18,46 @@ const ListReducer = (state, action) => {
         isFetching: false,
         error: true,
       };
-    // case 'CREATE_MOVIE_START':
-    //   return {
-    //     ...state,
-    //     isFetching: true,
-    //     error: false,
-    //   };
-    // case 'CREATE_MOVIE_SUCCESS':
-    //   return {
-    //     movies: [...state.movies, action.payload],
-    //     isFetching: false,
-    //     error: false,
-    //   };
-    // case 'CREATE_MOVIE_FAILURE':
-    //   return {
-    //     ...state,
-    //     isFetching: false,
-    //     error: true,
-    //   };
-    // case 'UPDATE_MOVIE_START':
-    //   return {
-    //     ...state,
-    //     isFetching: true,
-    //     error: false,
-    //   };
-    // case 'UPDATE_MOVIE_SUCCESS':
-    //   return {
-    //     movies: state.movies.map((movie) => {
-    //       if (movie._id === action.payload._id) {
-    //         return action.payload;
-    //       }
-    //     }),
-    //     isFetching: false,
-    //     error: false,
-    //   };
-    // case 'UPDATE_MOVIE_FAILURE':
-    //   return {
-    //     ...state,
-    //     isFetching: false,
-    //     error: true,
-    //   };
+    case 'CREATE_LIST_START':
+      return {
+        ...state,
+        isFetching: true,
+        error: false,
+      };
+    case 'CREATE_LIST_SUCCESS':
+      return {
+        lists: [...state.lists, action.payload],
+        isFetching: false,
+        error: false,
+      };
+    case 'CREATE_LIST_FAILURE':
+      return {
+        ...state,
+        isFetching: false,
+        error: true,
+      };
+    case 'UPDATE_LIST_START':
+      return {
+        ...state,
+        isFetching: true,
+        error: false,
+      };
+    case 'UPDATE_LIST_SUCCESS':
+      return {
+        lists: state.lists.map((list) => {
+          if (list._id === action.payload._id) {
+            return action.payload;
+          }
+        }),
+        isFetching: false,
+        error: false,
+      };
+    case 'UPDATE_LIST_FAILURE':
+      return {
+        ...state,
+        isFetching: false,
+        error: true,
+      };
     case 'DELETE_LISTS_START':
       return {
         ...state,
